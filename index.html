@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameWithJs</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="screen1" class="screen">
+            <h1>Let's Play The Game</h1>
+            <a href="">START</a>
+        </div>
+        <div id="screen2" class="screen">
+            <h1>Choose Your Avatar</h1>
+            <div class="images">
+                <img src="Chacha-Chaudhary.jpg" alt="">
+                <img src="nagraj.jpg" alt="">
+                <img src="shktimaan.jpg" alt="">
+            </div>
+        </div>
+        <div id="screen3" class="screen">
+            <div class="head">
+                <p class="Timer">Timer<span></span></p>
+                <p class="Score">Score<span></span></p>
+            </div>
+            <div class="fimag"></div>
+        </div>
+    </div>
+    <script>
+        let screen1=document.querySelector('#screen1')
+        let screen2=document.querySelector('#screen2')
+        let screen3=document.querySelector('#screen3')
+        let start=document.querySelector('#screen1 a')
+         
+          start.onclick = (e)=>{
+            e.preventDefault();
+            screen1.style.display='none';
+            screen2.style.display='flex';
+          }
+          let images=document.querySelectorAll('#screen2 img')
+        
+          
+          for(let i=0;i<images.length;i++){
+            images[i].onclick =()=>{
+            screen2.style.display='none';
+            screen3.style.display='flex';
+            letsPlay();
+            }
+          }
+          function letsPlay(){
+            let timer=0;
+            let Timer=document.querySelector('.Timer span')
+            let x=setInterval(animation,1000)
+            function animation(){
+                if(timer==10){
+                    clearInterval(x)
+                    console.log('time up')
+                }
+                else{
+                    Timer.innerHTML= ++timer;
+                    popPhoto();
+                }
+            }
+          }
+          function popPhoto(){
+            let newImg= document.createElement('img')
+            newImg.setAttribute('src',newImg)
+            // if(i==0){
+            //     newImg.src='nagraj.jpg'
+            // }
+            // if(i==2){
+            //     newImg.src='Chacha-Chaudhary.jpg'
+            // }
+            // if(i==3){
+            //     newImg.src='shktimaan.jpg'
+            // }
+            // console.log(y)
+            newImg.style.left= getRandomLeft()
+            newImg.style.top=getRandomTop()
+
+             newImg.setAttribute('onclick','RemoveImage(this)')
+           document.querySelector('#screen3 .fimag').append(newImg)
+            
+          }
+          function getRandomLeft(){
+            return Math.random() * window.innerWidth + 'px'
+          }
+
+          function getRandomTop(){
+            return Math.random() * window.innerHeight + 'px'
+          }
+          let score = 0;
+          let scoreSpan= document.querySelector('.Score span')
+            function RemoveImage(element){
+                element.remove()
+                scoreSpan.innerHTML= ++score;
+            
+            
+              }
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
